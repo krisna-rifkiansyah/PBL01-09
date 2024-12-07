@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+
+{% block title %}Profile of {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1 class="text-center">Hello, {{ request.user.username }}</h1>
+        <a href="{% url 'post' %}" class="btn btn-success col-md-2 offset-md-5">Create Post <i class="fa-solid fa-circle-plus"></i></a>
+        <h2>Your Posts:</h2>
+        <ul class="list-group">
+            {% for post in posts %}
+                <li class="list-group-item">
+                    <strong>{{ post.text }}</strong>
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" class="img-fluid rounded mt-3" alt="Post Image">
+                    {% endif %}
+                    <br>
+                    <small class="text-muted">Posted on {{ post.date_posted|date:"F j, Y, g:i a" }}</small>
+                    
+                </li>
+            {% empty %}
+                <li class="list-group-item">No posts yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

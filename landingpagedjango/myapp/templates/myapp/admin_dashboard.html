@@ -1,0 +1,63 @@
+{% extends 'home.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Admin Dashboard</h2>
+    
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5>User and Post Data</h5>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Date Joined</th>
+                        <th>Post Text</th>
+                        <th>Date Posted</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        {% for post in user.post_set.all %}
+                            <tr>
+                                <td>{{ forloop.parentloop.counter }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.date_joined|date:"Y-m-d" }}</td>
+                                <td>{{ post.text|truncatewords:5 }}</td>
+                                <td>{{ post.date_posted|date:"Y-m-d H:i" }}</td>
+                                <td>
+                                    {% if post.image %}
+                                        <img src="{{ post.image.url }}" alt="Post Image" class="img-thumbnail" style="width: 100px; height: auto;">
+                                    {% else %}
+                                        <span class="text-muted">No Image</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.date_joined|date:"Y-m-d" }}</td>
+                                <td colspan="3" class="text-muted text-center">No posts</td>
+                            </tr>
+                        {% endfor %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center">No users found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
