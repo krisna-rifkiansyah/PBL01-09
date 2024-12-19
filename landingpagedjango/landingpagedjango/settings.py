@@ -130,3 +130,5 @@ import os
 # Konfigurasi MEDIA untuk menyimpan dan menampilkan gambar
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# CSRF_TRUSTED_ORIGINS = ['https://c7a6-36-81-166-182.ngrok-free.app']
