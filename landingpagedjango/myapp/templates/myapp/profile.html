@@ -11,9 +11,9 @@
         <ul class="list-group">
             {% for post in posts %}
                 <li class="list-group-item">
-                    <strong>{{ post.text }}</strong>
+                    <strong>{{ post.text }}</strong><br>
                     {% if post.image %}
-                    <img src="{{ post.image.url }}" class="img-fluid rounded mt-3" alt="Post Image">
+                    <img src="{{ post.image.url }}" class="img-fluid rounded mt-3 post-image" alt="Post Image">
                     {% endif %}
                     <br>
                     <small class="text-muted">Posted on {{ post.date_posted|date:"F j, Y, g:i a" }}</small>
